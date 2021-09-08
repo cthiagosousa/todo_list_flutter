@@ -23,12 +23,18 @@ class App extends StatelessWidget {
           elevation: 0.5,
         ),
 
+        buttonColor: Colors.green,
+
         textTheme: TextTheme(
           headline1: GoogleFonts.ubuntu(
             textStyle: TextStyle(color: Colors.black, fontSize: 38,fontWeight: FontWeight.bold)
           ),
           headline6: GoogleFonts.ubuntu(
             textStyle: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w300)
+          ),
+          button: GoogleFonts.ubuntu(
+            color: Colors.white,
+            fontSize: 13,
           )
         )
       ),

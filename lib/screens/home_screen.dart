@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 import 'package:project/models/Task.dart';
-import 'package:project/database/tasks.dart';
 import 'package:project/stores/tasks_store.dart';
 import 'package:project/utils/routes.dart';
 
 import 'package:project/components/task_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  final List<Task> tasks = data;
-  final tasksStore = TasksStore();
+  final _tasksStore = TasksStore();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,12 +20,14 @@ class HomeScreen extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
 
-        child: ListView.builder(
-          itemCount: tasks.length,
+        child: Observer(
+          builder: (_) => ListView.builder(
+          itemCount: _tasksStore.tasks.length,
           itemBuilder: (context, index) {
-            final Task item = tasks[index];
+            final Task item = _tasksStore.tasks[index];
             return TaskItemWidget(title: item.title);
           }
+        ),
         )
       ),
 
