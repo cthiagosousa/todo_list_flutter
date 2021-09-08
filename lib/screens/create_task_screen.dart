@@ -22,8 +22,8 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
   }
 
   void _sendForm() {
-
       _formKey.currentState!.save();
+      
       final uuid = Uuid();
       final Task task = Task(
         id: uuid.v1(),

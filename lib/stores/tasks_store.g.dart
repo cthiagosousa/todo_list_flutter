@@ -12,13 +12,13 @@ mixin _$TasksStore on _TasksStore, Store {
   final _$tasksAtom = Atom(name: '_TasksStore.tasks');
 
   @override
-  List<Task> get tasks {
+  ObservableList<Task> get tasks {
     _$tasksAtom.reportRead();
     return super.tasks;
   }
 
   @override
-  set tasks(List<Task> value) {
+  set tasks(ObservableList<Task> value) {
     _$tasksAtom.reportWrite(value, super.tasks, () {
       super.tasks = value;
     });

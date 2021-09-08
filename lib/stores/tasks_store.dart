@@ -9,7 +9,7 @@ class TasksStore = _TasksStore with _$TasksStore;
 abstract class _TasksStore with Store{
 
   @observable
-  List<Task> tasks = [...data];
+  ObservableList<Task> tasks = ObservableList<Task>.of([...data]);
 
   @action
   void addTask(Task task) {
