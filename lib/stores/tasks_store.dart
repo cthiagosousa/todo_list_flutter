@@ -2,13 +2,17 @@ import 'package:mobx/mobx.dart';
 import 'package:project/models/Task.dart';
 import 'package:project/database/tasks.dart';
 
-abstract class TasksStore with Store{
+part 'tasks_store.g.dart';
+
+class TasksStore = _TasksStore with _$TasksStore;
+
+abstract class _TasksStore with Store{
 
   @observable
-  final List<Task> _tasks = data;
+  List<Task> tasks = data;
 
   @action
   void addTask(Task task) {
-    this._tasks.add(task);
+    this.tasks.add(task);
   }
 }

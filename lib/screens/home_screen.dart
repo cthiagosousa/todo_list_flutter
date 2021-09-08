@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
+
 import 'package:project/models/Task.dart';
 import 'package:project/database/tasks.dart';
+import 'package:project/stores/tasks_store.dart';
+import 'package:project/utils/routes.dart';
+
 import 'package:project/components/task_item_widget.dart';
 
-class HomeScreen extends StatefulWidget {
-  
-  @override
-  _HomeScreenState createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreen extends StatelessWidget {
   final List<Task> tasks = data;
+  final tasksStore = TasksStore();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +31,10 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.CREATE_TASK);
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

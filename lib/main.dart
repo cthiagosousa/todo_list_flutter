@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import 'package:project/utils/routes.dart';
 import 'package:project/screens/home_screen.dart';
+import 'package:project/screens/create_task_screen.dart';
 
 void main() {
   runApp(App());
@@ -31,7 +33,10 @@ class App extends StatelessWidget {
         )
       ),
 
-      home: HomeScreen(),
+      routes: {
+        Routes.HOME: (context) => HomeScreen(),
+        Routes.CREATE_TASK: (context) => CreateTaskScreen()
+      },
     );
   }
 }
