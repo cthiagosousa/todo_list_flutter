@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import 'package:project/models/Task.dart';
-import 'package:project/stores/tasks_store.dart';
-import 'package:project/utils/routes.dart';
+import 'package:project/controllers/home_controller.dart';
 
 import 'package:project/components/task_item_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  final _tasksStore = TasksStore();
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  final _controller = HomeController();
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,22 +17,38 @@ class HomeScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-
-        child: Observer(
-          builder: (BuildContext context) => ListView.builder(
-          itemCount: _tasksStore.tasks.length,
-          itemBuilder: (context, index) {
-            final Task item = _tasksStore.tasks[index];
-            return TaskItemWidget(title: item.title);
-          }
+        padding: EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Form(
+              key: _formKey,
+              child: TextFormField(
+                decoration: InputDecoration(hintText: "Tarefa"),
+                validator: _controller.titleValidator,
+                onSaved: (value) {
+                  _controller.titleInputValue = value!;
+                },
+              ),
+            ),
+            SizedBox(height: 10,),
+            Expanded(
+              child: Observer(
+                builder: (BuildContext context) => ListView.builder(
+                itemCount: _controller.tasks.length,
+                itemBuilder: (context, index) {
+                  final task = _controller.tasks[index];
+                  return TaskItemWidget(task);
+                }
+              ),
+              ),
+            ),
+          ],
         ),
-        )
       ),
 
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.pushNamed(context, Routes.CREATE_TASK);
-        },
+        backgroundColor: Theme.of(context).primaryColor,
+        onPressed: () => _controller.sendForm(_formKey),
         child: Icon(Icons.add),
       ),
     );

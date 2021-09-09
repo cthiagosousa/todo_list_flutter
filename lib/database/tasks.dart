@@ -1,6 +1,6 @@
 import 'package:project/models/Task.dart';
 
-const data = [
+final data = [
   Task(
     id: "1",
     title: 'Task01',

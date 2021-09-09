@@ -15,4 +15,9 @@ abstract class _TasksStore with Store{
   void addTask(Task task) {
     this.tasks.add(task);
   }
+
+  @action
+  void removeTask(Task task) {
+    this.tasks.remove(task);
+  }
 }

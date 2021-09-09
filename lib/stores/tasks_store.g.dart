@@ -38,6 +38,17 @@ mixin _$TasksStore on _TasksStore, Store {
   }
 
   @override
+  void removeTask(Task task) {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.removeTask');
+    try {
+      return super.removeTask(task);
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 tasks: ${tasks}
