@@ -49,6 +49,17 @@ mixin _$TasksStore on _TasksStore, Store {
   }
 
   @override
+  void changeIsCheck(Task task, bool? value) {
+    final _$actionInfo = _$_TasksStoreActionController.startAction(
+        name: '_TasksStore.changeIsCheck');
+    try {
+      return super.changeIsCheck(task, value);
+    } finally {
+      _$_TasksStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 tasks: ${tasks}

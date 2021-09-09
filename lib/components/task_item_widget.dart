@@ -6,6 +6,7 @@ import 'package:project/stores/tasks_store.dart';
 
 class TaskItemWidget extends StatelessWidget {
   final Task task;
+  
   const TaskItemWidget(this.task);
   
   @override
@@ -16,7 +17,7 @@ class TaskItemWidget extends StatelessWidget {
       child: Dismissible(
         key: UniqueKey(),
         direction: DismissDirection.startToEnd,
-        
+
         background: Container(
           color: Colors.red,
           padding: EdgeInsets.only(left: 40),

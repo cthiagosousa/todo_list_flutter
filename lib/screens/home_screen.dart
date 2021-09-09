@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import 'package:project/components/task_item_widget.dart';
-import 'package:project/models/Task.dart';
-import 'package:project/stores/tasks_store.dart';
-import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
+import 'package:provider/provider.dart';
+
+import 'package:project/stores/tasks_store.dart';
+import 'package:project/models/Task.dart';
+import 'package:project/components/task_item_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -13,8 +13,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final GlobalKey<FormState> _formKey = GlobalKey();
-  late String _title;
+  final _titleController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _titleController.dispose();
+  }
 
   String titleValidator(String? value) {
     if (value!.isEmpty) {
@@ -24,13 +29,11 @@ class _HomeScreenState extends State<HomeScreen> {
     return null!;
   }
 
-  void sendForm(GlobalKey<FormState> formKey, TasksStore _tasksStore) {
-      formKey.currentState!.save();
-      
+  void sendForm(TasksStore _tasksStore) {      
       final uuid = Uuid();
       final Task task = Task(
         id: uuid.v1(),
-        title: _title,
+        title: _titleController.text,
         isCheck: false,
       );
 
@@ -48,18 +51,32 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        padding: EdgeInsets.all(10),
         
         child: Column(
           children: [
-            Form(
-              key: _formKey,
-              child: TextFormField(
-                decoration: InputDecoration(hintText: "Nova Tarefa"),
-                validator: titleValidator,
-                onSaved: (value) {
-                  _title = value!;
-                },
+            Container(
+              width: double.infinity,
+              height: 50,
+              padding: EdgeInsets.only(left: 10, right: 10),
+              color: Theme.of(context).primaryColor,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Nova Tarefa",
+                        border: InputBorder.none
+                      ),
+                      controller: _titleController,
+                      validator: titleValidator,
+                    ),
+                  ),
+                  IconButton(
+                    onPressed: () => sendForm(_tasksStore),
+                    icon: Icon(Icons.add, color: Colors.white,),
+                  )
+                ],
               ),
             ),
             SizedBox(height: 10,),
@@ -76,12 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ],
         ),
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Theme.of(context).primaryColor,
-        onPressed: () => sendForm(_formKey, _tasksStore),
-        child: Icon(Icons.add),
       ),
     );
   }
