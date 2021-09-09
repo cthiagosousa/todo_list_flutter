@@ -18,7 +18,7 @@ class _TaskItemWidget extends State<TaskItemWidget> {
   Widget build(BuildContext context) {
     return Card(
       child: Dismissible(
-        key: Key(widget.task.id),
+        key: UniqueKey(),
         direction: DismissDirection.startToEnd,
         background: Container(
           color: Colors.red,
