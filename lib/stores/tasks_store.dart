@@ -20,4 +20,9 @@ abstract class _TasksStore with Store{
   void removeTask(Task task) {
     this.tasks.remove(task);
   }
+
+  @action
+  void changeIsCheck(Task task, bool? value) {
+    task.changeIsCheck(value!);
+  }
 }

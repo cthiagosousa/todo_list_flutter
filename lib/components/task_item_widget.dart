@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:project/models/Task.dart';
 import 'package:project/stores/tasks_store.dart';
 
-class TaskItemWidget extends StatefulWidget {
+class TaskItemWidget extends StatelessWidget {
   final Task task;
-
   const TaskItemWidget(this.task);
-
-  @override
-  _TaskItemWidget createState() => _TaskItemWidget();
-}
-
-class _TaskItemWidget extends State<TaskItemWidget> {
-  final _tasksStore = TasksStore();
   
   @override
   Widget build(BuildContext context) {
+    final _tasksStore = Provider.of<TasksStore>(context);
+
     return Card(
       child: Dismissible(
         key: UniqueKey(),
         direction: DismissDirection.startToEnd,
+        
         background: Container(
           color: Colors.red,
           padding: EdgeInsets.only(left: 40),
@@ -33,23 +30,24 @@ class _TaskItemWidget extends State<TaskItemWidget> {
         ),
 
         onDismissed: (direction) {
-          _tasksStore.removeTask(widget.task);
+          _tasksStore.removeTask(task);
 
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             duration: Duration(milliseconds: 500),
             backgroundColor: Theme.of(context).primaryColor,
-            content: Text('${widget.task.title} foi removido da lista.'
+            content: Text('${task.title} foi removido da lista.'
             )
           ));
         },
 
         child: CheckboxListTile(
-          title: Text(widget.task.title, style: Theme.of(context).textTheme.headline6),
+          title: Text(task.title, style: Theme.of(context).textTheme.headline6),
           activeColor: Theme.of(context).primaryColor,
+
           onChanged: (bool? value) {
-              setState(() => widget.task.changeIsCheck(value!));
+              _tasksStore.changeIsCheck(task, value);
           },
-          value: widget.task.isCheck,
+          value: task.isCheck,
         ),
       ),
     );
