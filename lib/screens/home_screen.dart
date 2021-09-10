@@ -27,7 +27,7 @@ class HomeScreen extends StatelessWidget {
             
             Expanded(
               child: Observer(
-                builder: (BuildContext context) => ListView.builder(
+                builder: (_) => ListView.builder(
                 itemCount: _tasksStore.tasks.length,
                 itemBuilder: (context, index) {
                   final task = _tasksStore.tasks[index];

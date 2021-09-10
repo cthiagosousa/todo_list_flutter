@@ -32,15 +32,22 @@ class CustomInputWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 50,
+      height: 70,
       padding: EdgeInsets.only(left: 10, right: 10),
-      color: Theme.of(context).primaryColor,
+      decoration: BoxDecoration(
+        color: Theme.of(context).primaryColor,
+        borderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(20),
+          bottomRight: Radius.circular(20)
+        )
+      ),
       child: Row(
         children: [
           Expanded(
             child: TextFormField(
               style: Theme.of(context).textTheme.headline3,
               decoration: InputDecoration(
+                hintStyle: Theme.of(context).textTheme.headline3,
                 hintText: "Nova Tarefa",
                 border: InputBorder.none
                 ),

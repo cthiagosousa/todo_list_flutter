@@ -29,19 +29,23 @@ class App extends StatelessWidget {
 
         textTheme: TextTheme(
           headline1: GoogleFonts.ubuntu(
-            textStyle: TextStyle(color: Colors.black, fontSize: 38,fontWeight: FontWeight.bold)
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 38,
+              fontWeight: FontWeight.bold
+              )
           ),
           headline3: GoogleFonts.ubuntu(
             color: Colors.white,
-            fontSize: 15,
+            fontSize: 18,
             fontWeight: FontWeight.normal
           ),
           headline6: GoogleFonts.ubuntu(
-            textStyle: TextStyle(color: Colors.black, fontSize: 15, fontWeight: FontWeight.w300)
-          ),
-          button: GoogleFonts.ubuntu(
-            color: Colors.white,
-            fontSize: 13,
+            textStyle: TextStyle(
+              color: Colors.black,
+              fontSize: 15,
+              fontWeight: FontWeight.w300
+            )
           )
         )
       ),
