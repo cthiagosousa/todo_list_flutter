@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:project/models/Task.dart';
 import 'package:project/stores/tasks_store.dart';
 
 class TaskItemWidget extends StatelessWidget {
+  final _tasksStore = GetIt.I.get<TasksStore>();
   final Task task;
   
-  const TaskItemWidget(this.task);
+  TaskItemWidget(this.task);
   
   @override
   Widget build(BuildContext context) {
-    final _tasksStore = Provider.of<TasksStore>(context);
-
     return Card(
       child: Dismissible(
         key: UniqueKey(),
@@ -48,6 +47,7 @@ class TaskItemWidget extends StatelessWidget {
           onChanged: (bool? value) {
               _tasksStore.changeIsCheck(task, value);
           },
+
           value: task.isCheck,
         ),
       ),
