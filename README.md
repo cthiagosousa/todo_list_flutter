@@ -20,8 +20,8 @@ flutter pub run build_runner watch
 
 ## 🛠️ Construído com
 
-* [Flutter](https://flutter.dev/) - O framework mobile usado
-* [MobX](https://pub.dev/packages/mobx) - Gerenciador de estado
-* [get_it](https://pub.dev/packages/get_it) - Provider
+* [Flutter](https://flutter.dev/)
+* [MobX](https://pub.dev/packages/mobx)
+* [get_it](https://pub.dev/packages/get_it)
 ---
 ⌨️ com ❤️ por Thiago Sousa 😊
