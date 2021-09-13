@@ -14,15 +14,21 @@ abstract class _TasksStore with Store{
   @action
   void addTask(Task task) {
     this.tasks.add(task);
+
+    tasks = tasks;
   }
 
   @action
   void removeTask(Task task) {
     this.tasks.remove(task);
+
+    tasks = tasks;
   }
 
   @action
   void changeIsCheck(Task task, bool? value) {
     task.changeIsCheck(value!);
+
+    tasks = tasks;
   }
 }

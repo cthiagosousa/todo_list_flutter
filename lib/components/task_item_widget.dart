@@ -45,7 +45,7 @@ class TaskItemWidget extends StatelessWidget {
           activeColor: Theme.of(context).primaryColor,
 
           onChanged: (bool? value) {
-              _tasksStore.changeIsCheck(task, value);
+              _tasksStore.changeIsCheck(task, value!);
           },
 
           value: task.isCheck,
